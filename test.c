@@ -6,6 +6,7 @@
 
 #define NUM_OF_CORES 4
 #define MAX_PRIME 1316134912
+// #define MAX_PRIME 100000
 
 void do_primes()
 {
