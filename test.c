@@ -6,12 +6,11 @@
 
 #define NUM_OF_CORES 4
 #define MAX_PRIME 1316134912
-// #define MAX_PRIME 100000
 
-void do_primes()
+void do_primes(int maxPrime)
 {
     unsigned long i, num, primes = 0;
-    for (num = 1; num <= MAX_PRIME; ++num) {
+    for (num = 1; num <= maxPrime; ++num) {
         for (i = 2; (i <= num) && (num % i != 0); ++i);
         if (i == num)
             ++primes;
@@ -21,19 +20,28 @@ void do_primes()
 
 int main(int argc, char ** argv)
 {
+    if (argc < 3) {
+      printf("Not enough arguments. arg 1 = NUM_OF_CORES. arg 2 = MAX_PRIME\n");
+      printf("Example: ./a.out 4 1000\n");
+      return -1;
+    }
+
+    int numCores = atoi(argv[1]);
+    int maxPrime = atoi(argv[2]);
+
     printf("Begin CPU load test with %d cores and the max prime being %d\n",
-        NUM_OF_CORES, MAX_PRIME);
+        numCores, maxPrime);
 
     time_t start, end;
     time_t run_time;
     unsigned long i;
-    pid_t pids[NUM_OF_CORES];
+    pid_t pids[numCores];
 
     /* start of test */
     start = time(NULL);
-    for (i = 0; i < NUM_OF_CORES; ++i) {
+    for (i = 0; i < numCores; ++i) {
         if (!(pids[i] = fork())) {
-            do_primes();
+            do_primes(maxPrime);
             exit(0);
         }
         if (pids[i] < 0) {
@@ -41,13 +49,13 @@ int main(int argc, char ** argv)
             exit(1);
         }
     }
-    for (i = 0; i < NUM_OF_CORES; ++i) {
+    for (i = 0; i < numCores; ++i) {
         waitpid(pids[i], NULL, 0);
     }
     end = time(NULL);
     run_time = (end - start);
     printf("This machine calculated all prime numbers under %d, %d times "
-           "in %d seconds\n", MAX_PRIME, NUM_OF_CORES, run_time);
+           "in %d seconds\n", maxPrime, numCores, run_time);
 
     return 0;
 }
