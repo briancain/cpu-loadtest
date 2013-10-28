@@ -55,7 +55,7 @@ int main(int argc, char ** argv)
     end = time(NULL);
     run_time = (end - start);
     printf("This machine calculated all prime numbers under %d, %d times "
-           "in %d seconds\n", maxPrime, numCores, run_time);
+           "in %ld seconds\n", maxPrime, numCores, run_time);
 
     return 0;
 }
