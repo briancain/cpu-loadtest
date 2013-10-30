@@ -20,17 +20,23 @@ void do_primes(int maxPrime)
 
 int main(int argc, char ** argv)
 {
+    int numCores, maxPrime;
+
     if (argc < 3) {
       printf("Not enough arguments. arg 1 = NUM_OF_CORES. arg 2 = MAX_PRIME\n");
       printf("Example: ./a.out 4 1000\n");
-      return -1;
+      printf("Switching to default values for Cores: %d and Max Prime: %d\n", NUM_OF_CORES, MAX_PRIME);
+
+      numCores = NUM_OF_CORES;
+      maxPrime = MAX_PRIME;
     }
+    else {
+      numCores = atoi(argv[1]);
+      maxPrime = atoi(argv[2]);
 
-    int numCores = atoi(argv[1]);
-    int maxPrime = atoi(argv[2]);
-
-    printf("Begin CPU load test with %d cores and the max prime being %d\n",
+      printf("Began CPU load test with %d cores and the max prime being %d\n",
         numCores, maxPrime);
+    }
 
     time_t start, end;
     time_t run_time;
