@@ -1,6 +1,6 @@
 # CPU Loadtest
 
-A simple C program that finds primes. It can be used as a way to stress test n number of CPU's. Changing the #define at the top of the file will determine how many CPUs the program will use.
+A simple C program that finds primes. It can be used as a way to stress test n number of CPU's. Passing in the cores you want to use along with the max prime you want to calculate will determine how it runs.
 
 ## Running from command line
 
@@ -13,6 +13,6 @@ Where <num-of-cores> is the number of cores that will be used (minus <>'s) and w
 
 ## Source
 
-Found on stackoverflow. Putting it up on my github for future reference.
+Found on stackoverflow. Putting it up on my github for future reference. Has been modified, but the general algorithm is the same.
 
 - http://stackoverflow.com/questions/9244481/how-to-get-100-cpu-usage-from-a-c-program/9244508#9244508
